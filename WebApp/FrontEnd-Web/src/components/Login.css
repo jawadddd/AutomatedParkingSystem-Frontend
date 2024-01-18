@@ -1,0 +1,10 @@
+.link {
+    color: blue; /* Set the color you want */
+    cursor: pointer;
+    text-decoration: underline; /* Add underline to mimic a link */
+  }
+  
+  .link:hover {
+    color: darkblue; /* Change color on hover */
+  }
+  

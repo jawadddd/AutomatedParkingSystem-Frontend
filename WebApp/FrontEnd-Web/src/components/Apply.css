@@ -1,0 +1,65 @@
+.register-form {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group h2{
+    margin-bottom: 20px;
+  }
+  .inputfile{
+    border:none !important;
+  }
+  .form-group2{
+    border: none !important;
+  }
+  .register-form{
+    border: none;
+    border-radius: 22px;background-color: white !important;
+    padding: 30px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 300px;
+    padding: 10px;
+    font-size: 12px;
+    color: 1px solid rgb(209, 206, 206);
+    background-color: transparent;
+    box-sizing: border-box;
+    border-radius: 10px;
+  
+    border: 1px solid rgb(132, 132, 132);
+  }
+  
+  
+  button {
+    background-color: #008CBA;
+    color: white;
+    width: 300px;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #008CBA;
+  }
+  
+  .login-apply-page {
+    text-align: center;
+  }
+  
+  .login-apply-container {
+    margin-top: 20px;
+  }
+  
