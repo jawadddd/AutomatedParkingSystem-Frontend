@@ -1,5 +1,5 @@
 # AutomatedParkingSystem
-It includes Complete system consisting of Mobile App For End Users, Web App Panel for Super Admin(Admin of APS), Web App Panel for all Company Admins(Admin of company registered in APS or using facilities of APS) and IoT to provide efficient management to companies and efficient parking experience to users in parking and reduce cost and time wastage.      
+It includes Complete system consisting of Mobile App For End Users, Web App Panel for Super Admin(Admin of APS), Web App Panel for all Company Admins(Admins of companies registered in APS or using facilities of APS) and IoT to provide efficient management to companies and efficient parking experience to users in parking and reduce cost and time wastage.      
   
 -> Mobile App is for end users of any company who want to park,they first need to book its parking from Mobile App.  
   
