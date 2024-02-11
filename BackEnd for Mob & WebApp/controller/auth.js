@@ -37,7 +37,7 @@ const reject= async(req,res)=>{
       host:"smtp.gmail.com",
       auth: {
       user: 'jawadhaider682@gmail.com',//add here your mail
-      pass: 'tfphhecamcfrxcew'//add here your gmail app pass
+      pass: 'hhvytvawppihugqt'//add here your gmail app pass
       },
       secure: true,
       });
@@ -55,7 +55,7 @@ const reject= async(req,res)=>{
           }
           else
           {
-              console.log("Email sent to your entered email bro_"+nameIs);
+              console.log("Email sent to your entered email bro_"+email1);
           }
       });
 
@@ -65,6 +65,7 @@ const reject= async(req,res)=>{
     res.status(200).json({ message: 'Company admin Rejected successfully' });
   } catch (error) {
     console.error('Error accepting company admin:', error.message);
+    console.log(email1)
     res.status(500).json({ error: 'Internal server error' });
   }  
 }
@@ -98,10 +99,11 @@ const accept= async(req,res)=>{
       port: 465,
       host:"smtp.gmail.com",
       auth: {
-      user: 'jawadhaider682@gmail.com',//add here your mail
-      pass: 'tfphhecamcfrxcew'//add here your gmail app pass
-      },
+        user: 'jawadhaider682@gmail.com',//add here your mail
+        pass: 'hhvytvawppihugqt'//add here your gmail app pass
+        },
       secure: true,
+
       });
       var mailOptions={
           from:'jawadhaider682@gmail.com',//add here your mail
@@ -149,9 +151,9 @@ try{
       port: 465,
       host:"smtp.gmail.com",
       auth: {
-      user: 'jawadhaider682@gmail.com',//add here your mail
-      pass: 'tfphhecamcfrxcew'//add here your gmail app pass
-      },
+        user: 'jawadhaider682@gmail.com',//add here your mail
+        pass: 'hhvytvawppihugqt'//add here your gmail app pass
+        },
       secure: true,
       });
       var mailOptions={
@@ -187,8 +189,22 @@ try{
 const register= async(req,res)=>{
     try {
       // Handle user registration here
-     const { userName, email, password, contactNumber, noOfFloors, noOfSlots  }= req.body;
+     const { userName, email, password, contactNumber,noOfFloors, noOfSlots, floorsPlan  }= req.body;
      console.log("came in register.",password);
+     console.log(req.body);
+     let floorsPlann = JSON.parse(req.body.floorsPlan);
+     console.log("No of Floors:"+floorsPlann.length);
+     floorsPlann.map((floor, floorIndex) => {
+       console.log(`Floor Number${floorIndex + 1}:`);
+       console.log("Number of rows:"+floor.length);
+       floor.map((row, rowIndex) => {
+         console.log("Number of cols:"+row.length);
+         row.map((cell, columnIndex) => {
+           console.log(`Cell [${floorIndex}, ${rowIndex}, ${columnIndex}]:`, cell);
+         });
+       });
+     });        
+
       //let role="superAdmin";
       let role="companyAdmin";
       //let status="accepted";
@@ -201,7 +217,7 @@ const register= async(req,res)=>{
       const existingUser = await User.findOne({ email });
     if(!existingUser)
     {
-      const user = new User({ userName, role, email, password, contactNumber, noOfFloors, noOfSlots,status  });
+      const user = new User({ userName, role, email, password, contactNumber,noOfFloors, noOfSlots, floorsPlan:floorsPlann, status  });
       if (image) {
         const filePath = await storeFile(image, user._id);
         console.log("filePath user: ", filePath);
@@ -321,6 +337,24 @@ const login = async (req, res) => {
 
 
 
+
+const getAdminByEmail = async (req, res) => {
+  try {
+    console.log("aya hai isme aab");
+    const { email } = req.query;
+    const adminn = await User.findOne({ email });
+    const responseData = {
+      floorsPlan:adminn.floorsPlan
+    };
+    
+console.log(responseData);
+
+    res.status(200).json(responseData);
+  } catch (error) {
+    console.error("Error fetching Admin data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 const getAdmins = async (req, res) => {
   try {
     console.log("aya isme");
@@ -362,4 +396,4 @@ const storeFile = async (file, id) => {
 };
 //Project
 
-  module.exports={register,verifyEmail,login,getAdmins,accept,reject,sendMessage};
+  module.exports={register,verifyEmail,login,getAdmins,getAdminByEmail,accept,reject,sendMessage};

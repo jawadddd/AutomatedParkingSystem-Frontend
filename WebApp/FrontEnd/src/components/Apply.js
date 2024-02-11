@@ -1,14 +1,16 @@
 import React ,{ useEffect,useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import './Apply.css';
 const Apply = ({setLogin}) => {
+  const navigate = useNavigate();
     const [formData, setFormData] = useState({
         userName: '',
         email: '',
         password:'',
         contactNumber: '',
-        noOfFloors: '',
-        noOfSlots: '',
+   //     noOfFloors: '',
+   //     noOfSlots: '',
         profilePhoto:null,
       });
 
@@ -35,38 +37,7 @@ const Apply = ({setLogin}) => {
 
       const handleSubmit  = async (e) => {
         e.preventDefault();
-        try {
-          console.log(formData.profilePhoto);
-          console.log("formData is"+formData);
-          if(formData.profilePhoto!==null)
-          {
-            const form = new FormData();
-            form.append("userName", formData.userName);
-            form.append("email", formData.email);
-            form.append("password", formData.password);
-            form.append("contactNumber", formData.contactNumber);
-            form.append("noOfFloors", formData.noOfFloors);
-            form.append("noOfSlots", formData.noOfSlots);
-            form.append("profilePhoto", formData.profilePhoto);
-            const response = await axios.post('http://localhost:4000/api/v1/register', form);
-    
-            if (response.status === 200) {
-              console.log('Registration Successful:', response.data.message);
-              // You can handle the successful registration here, e.g., redirect to a login page
-              setLogin();
-            } else {
-              console.error('Registration Failed:', response.data.message);
-            }
-  
-          }
-          else
-          {
-            alert("Must include profile photo of jpg, png or jpeg type!");
-          }
-        } catch (error) {
-          console.error('Error during registration:', error.message);
-        }
-
+        navigate("/ApplyForParkingSystem", { state: formData });
       };
   return (
     <div>
@@ -123,32 +94,7 @@ const Apply = ({setLogin}) => {
         />
       </div>
 
-      <div className="form-group">
-      
-        <input
-          type="number"
-          id="noOfFloors"
-          placeholder="Number of Floors"
-          name="noOfFloors"
-          value={formData.noOfFloors}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-      
-        <input
-          type="number"
-          id="noOfSlots"
-          placeholder="Number of Slots"
-          name="noOfSlots"
-          value={formData.noOfSlots}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
+    
       <div className="form-group">
       <input
         type="file"
@@ -161,7 +107,7 @@ const Apply = ({setLogin}) => {
 
 
       <div className="form-group">
-        <button type="submit">Apply</button>
+        <button type="submit">Continue</button>
       </div>
       <div className="form-group">
         <p>Already have an account? <span className="link" onClick={setLogin}>Login</span> </p>

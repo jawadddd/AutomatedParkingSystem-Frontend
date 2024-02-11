@@ -1,8 +1,369 @@
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in; /* Adjusted animation duration */
+  }
+  .floorsPlann{
+    width:100%;
+  }
+
+  .centreBottomDown413 button{
+    padding: 10px 20px;
+    width: 180px !important;
+    margin-left: 10px;
+    font-size: medium;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for button hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+
+  }
+
+
+  
+  /* Hover effect */
+  .centreBottomDown413 button:hover {
+    background-color: #0056b3;
+    animation: buttonHoverAnimation 0.5s ease infinite alternate; /* Added animation */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Updated shadow effect */
+  }
+  
+  /* Animation keyframes */
+  @keyframes buttonHoverAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-2px);
+    }
+  }
+  
+  .centreBottomDown423 button{
+    padding: 10px 20px;
+    width: 100px !important;
+    margin-left: 0px;
+    font-size: medium;
+    border: none;
+    border-radius: 5px !important;
+    background-color: #2c2c2c !important;
+    color: #fff !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for button hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+
+  }
+
+
+  
+  /* Hover effect */
+  .centreBottomDown423 button:hover {
+    background-color: #6c6b6b;
+    animation: buttonHoverAnimation 0.5s ease infinite alternate; /* Added animation */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Updated shadow effect */
+  }
+ 
+
+  .AcceptReject{
+    box-shadow: 1px 3px 21px 4px rgba(0.1, 0.1, 0.1, 0.1); /* Box shadow */
+    display: flex;
+    margin-top: 15px;
+    justify-content:center ;
+    align-items: center;
+padding: 15px;
+border-radius: 10px;
+  }
+  .AcceptReject h2{
+    margin-right: 30px;
+   
+  }
+  .five h2{
+    margin-right: 10px;
+  }
+  .centreBottomDown413 button{
+    margin-right: 30px;
+    font-size: medium;
+    font-weight: bold;
+    background-color: #458dda !important;
+    width:100px !important;
+  }
+  
+  .ViewPageGrid p{
+    text-align: start;
+    font-size: 30px !important;
+    font-weight: 700 !important;
+  }
+.heading-container {
+    width:100%;
+    padding-left: 5%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
+    
+    margin-top: 40px;
+    animation: slideInDown 1s ease; /* Apply slide-in animation */
+  }
+  
+  @keyframes slideInDown {
+    0% {
+      transform: translateY(0%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .heading {
+    text-align: start;
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(71, 70, 70); /* Adjust color as needed */
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+  }
+  .loadingContainer{
+    min-height:40vh;
+    min-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .loadingGif{
+
+    width:40px;
+    height:40px;
+  }
+  .dialog-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px; /* Increased border-radius for a smoother look */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Increased shadow for depth */
+    animation: slideIn 0.3s ease-out; /* Adjusted animation duration */
+    max-width: 300px; /* Adjusted max-width for better responsiveness */
+    width: 90%; /* Adjusted width for better responsiveness */
+  }
+  
+  .dialog-content h2 {
+    margin-top: 0;
+    font-size: 24px; /* Increased font size for better emphasis */
+    color: #333; /* Darkened text color for better readability */
+  }
+  
+  .dialog-content input {
+    width: 100%;
+    padding: 12px; /* Increased padding for better input size */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none; /* Removed outline for a cleaner look */
+    transition: border-color 0.3s ease; /* Added transition for input focus */
+  }
+
+  .dialog-content input:focus {
+    border-color: #007bff; /* Changed border color on focus for better visibility */
+  }
+  
+  .dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px; /* Increased margin for better spacing */
+  }
+  
+  .dialog-buttons button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Added transition for button hover */
+  }
+  
+  .dialog-buttons button:hover {
+    background-color: #0056b3; /* Darkened button color on hover for better feedback */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }  
+
+
+  .grid-cell:hover {
+    /* Add box shadow on hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  .grid-cell {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+    /* transition: box-shadow 0.2s ease; */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+.FormLeftRightSide{
+display: flex !important;
+flex-direction: row !important;
+
+padding: 20px;
+border-radius: 15px;
+margin-bottom: 20px;
+background-color: white !important;
+
+}
+.blocktype{
+    margin-left: 10px !important;
+    width:130px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+ font-size:medium;
+ background-color: #626175;
+ color: white;
+}
+.FormHeading{
+    text-align: start !important;
+}
+.FormRightSide{
+    padding-top: 50px !important;
+    padding-left: 30px !important;
+}
+.ViewPageGrid{
+    padding-left: 30px !important;
+}
+.ApplicationFormPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-gap: 5px;
+  }
+  
+  .grid-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    grid-gap: 5px;
+  }
+
+
+
+
+
+
+
+
+  .submitButton {
+    padding: 10px 20px;
+    width: 180px !important;
+    margin-left: 10px;
+    font-size: medium;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for button hover */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Added shadow effect */
+  }
+  
+  /* Hover effect */
+  .submitButton:hover {
+    background-color: #0056b3;
+    animation: buttonHoverAnimation 0.5s ease infinite alternate; /* Added animation */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Updated shadow effect */
+  }
+  
+  /* Animation keyframes */
+  @keyframes buttonHoverAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-2px);
+    }
+  }
+  
+  
+  .grid-cell {
+    border: 1px solid #6f6868;
+    padding: 23px;
+    text-align: center;
+    
+    font-size: 16px;
+  }
+.ApplicationFormPage{
+    font-family: "Poppins", sans-serif !important;
+   background-color: #e5e4e4 !important;
+    display: flex;
+    align-items:flex-start;
+    min-width: fit-content !important;
+    min-height:100vh;
+
+    padding: 4%;
+    
+    flex-direction: column;
+
+}
+.form-group2{
+    display: flex;
+    align-items: center !important;
+    
+    text-align: center !important;
+    justify-content: center !important;
+}
+.form-group2 h2 {
+    margin-bottom: 0px !important;
+    min-width: fit-content;
+    font-weight: 500;
+}
+.form-group2 input{
+margin-left:5%;
+height:35px !important;   
+}
 .three div h2{
     font-weight:500;
 }
 .one div h2{
     font-weight:500;
+
 }
 .four div h2{
     font-weight:500;
@@ -54,9 +415,9 @@
   
   /* Optional: Style for the message box container */
   .message-container {
-    width:75%;
+    width:100%;
     
-    padding: 20px;
+    padding-left: 4%;
     border-radius: 10px;
     
   }
@@ -68,47 +429,109 @@
     font-weight: bold;
     margin-bottom: 15px;
   }
-
+.up{
+    display: flex !important;
+}
 .SuperAdminPanelDetail{
-    height: 584px;
-    width: 100%;
+    min-height:90vh ;
+    min-width: 100% ;
     font-weight: 400;
-    display: flex;
+    display: block !important;
     font-family: "Poppins", sans-serif !important;
     
 }
-.SuperAdminPanelDetailLeft{
-    height: 100%;
-    width: 50%;
-    display: flex;
-    align-items: center;
+.SuperAdminPanelDetailOne{
+       position: relative;
+    min-width: 100%;
+    height: 50vh;
+    overflow: hidden;    align-items: center;
     justify-content: center;
 }
-.SuperAdminPanelDetailLeft img{
-    width:100%;
+.SuperAdminPanelDetailOne img{
+    min-width:100%;
 height:100%;
+filter: brightness(65%);
 object-fit: cover;
 }
 
-
-
-.SuperAdminPanelDetailRight{
+.SuperAdminPanelDetailTwo{
     height: 100%;
-    width: 50%;
+     padding-left:3% ;
+    min-width: 100% !important;
+    display: flex !important;
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+}
+.ViewPageGrid h2{
+text-align: start !important;
+}
+.SuperAdminPanelDetailThree{
+    height: 100%;
+    min-width: 100%;
+    padding-left: 5%;
+    padding-top:16px;
+    padding-bottom:30px;
     display: flex;
     font-size: smaller;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items:flex-start;
+    justify-content:flex-start;
 }
 
-.one{
-    padding:5px 0px 5px 0px;
-    width: 68%;;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+@media (max-width: 540px ) {
+
+    .one{
+    text-align: start;
+       width:min-content !important;
+        position: absolute;
+      bottom: 5%;
+      left: 4%;
+      color: white; /* Adjust the color as needed */
+      font-size: 22px; /* Adjust the font size as needed */
+      font-weight: bolder;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding shadow for better readability */
+      padding: 8px; /* Add padding for better readability */
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+      border-radius: 10px; /* Adding border-radius for a softer look */
+    
+    }
+    
 }
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+.one{
+    position: absolute;
+  bottom: 5%;
+  backdrop-filter: blur(1px);
+  left: 4%;
+  text-align: left;
+  color: white; /* Adjust the color as needed */
+  font-size: 28px; /* Adjust the font size as needed */
+  font-weight: medium;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adding shadow for better readability */
+  padding: 8px; /* Add padding for better readability */
+  /* background-color: rgba(0, 0, 0, 0.5); Semi-transparent black background */
+  border-radius: 10px; /* Adding border-radius for a softer look */
+  animation: fadeIn 1s ease;
+}
+
+.one p{
+    color:#dfe3df !important;
+    backdrop-filter: blur(10px);
+}
+.one a{
+    backdrop-filter: blur(10px);
+    color:#dfe3df !important;
+}
+
+
 .two{
     padding:5px 0px 5px 0px;
     width: 68%;;
@@ -130,7 +553,7 @@ object-fit: cover;
     justify-content: flex-start;
 }
 .five{
-    padding:5px 0px 5px 0px;
+    padding:5px 0px 5px 3px;
     width: 68%;
     display: flex;
     align-items: center;
@@ -304,7 +727,27 @@ object-fit: cover;
     padding: 0% 5% 2% 5%;
     justify-content: space-between;
 }
+.RegisteredcentreBottomUp{
+    color:#999 !important;
+    display: flex;
+    align-items: center;
+    padding: 0% 14% 2% 5% !important;
+    justify-content: space-between;
+}
 
+.RegisteredcentreBottomDown4{
+    display: flex;
+    width:31% !important;
+    justify-content: space-around;
+    align-items: center;
+}
+.RegisteredcentreBottomDown3{
+width:0% !important;
+display: flex;
+margin-right: 0px !important;
+align-items: center;
+justify-content: center;
+}
 .centreBottomDown4{
     display: flex;
     width:20%;
@@ -318,6 +761,8 @@ margin-right: -25px;
 align-items: center;
 justify-content: center;
 }
+
+
 .centreBottomDown2{
     width:20%;
     display: flex;
@@ -358,7 +803,7 @@ color: #656464;
     font-weight: 600;
     font-family: "Poppins", sans-serif !important;
     background-color: #dfe3df;
-    color: #e41717 !important;
+    color: #e41717;
        margin-right: 10px;
         font-size: 15px;
         width: 92px;
@@ -370,7 +815,23 @@ color: #656464;
         border: none;
         cursor: pointer;
     }
-    
+    .centreBottomDown422 button{    
+        font-weight: 600;
+        font-family: "Poppins", sans-serif !important;
+        background-color: #dfe3df;
+        
+           margin-right: 10px;
+            font-size: 15px;
+            width: 92px;
+            border-radius: 10px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+        }
+        
 .centreBottomDown{
         padding: 10px 0px 10px 0px;
         border-top: 1px solid #f1eded;

@@ -46,6 +46,7 @@ const SuperAdminHomePage = () => {
   const { state } = location;
   const [searchValue, setSearchValue] = useState('');
 
+  const navigate = useNavigate();
   const [adminsData, setAdminsData] = useState(null);
   const [filteredCompanyAdmins, setFilteredCompanyAdmins] = useState([]);
 
@@ -186,6 +187,21 @@ console.log(completeAdminsData);
   //   );
   //   setFilteredCompanyAdmins(updatedList);
   // };
+  const handleNav = (companyAdmin,superAdminPhoto) => {
+    console.log('Company Admin:', companyAdmin);
+    console.log('Profile Photo:', superAdminPhoto);
+    // Add your additional attribute to the state
+    let from="homePage";
+    const stateObject = {
+      companyAdmin,
+      superAdminPhoto,
+      from,
+    };
+    // Use navigate to redirect to the "/ApplicationDetail" route with additional attributes in state
+    navigate("/SuperAdminHomePage/ApplicationDetail", { state: stateObject });
+  };
+  
+
 
   return (
     <>
@@ -217,7 +233,7 @@ console.log(completeAdminsData);
  
    <div className="centreBottom">
  
-   <div className="centreBottomUp">
+   <div className="RegisteredcentreBottomUp centreBottomUp">
  
    <div className="centreBottomUp1">
      <h3>Username</h3>
@@ -246,8 +262,12 @@ console.log(completeAdminsData);
                      <a className="centreBottomDown2"  
                      href={`mailto:${companyAdmin.email}`} >
 {companyAdmin.email}</a>
-                     <div className="centreBottomDown3">{companyAdmin.contactNumber}</div>
-                     <div className="centreBottomDown4">
+                     <div className="RegisteredcentreBottomDown3 centreBottomDown3">{companyAdmin.contactNumber}</div>
+                     <div className="RegisteredcentreBottomDown4 centreBottomDown4">
+                     <div className="centreBottomDown41">
+                         <button onClick={() => handleNav(companyAdmin,adminsData.superAdmin.profilePhoto)}>View</button>
+                       </div>
+
                        <div className="centreBottomDown41">
                          <button onClick={() => openAcceptConfirmation(companyAdmin)}>Accept</button>
                        </div>

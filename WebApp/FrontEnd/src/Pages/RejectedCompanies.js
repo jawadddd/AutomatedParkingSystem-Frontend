@@ -76,12 +76,14 @@ console.log(completeAdminsData);
     console.log('Company Admin:', companyAdmin);
     console.log('Profile Photo:', superAdminPhoto);
     // Add your additional attribute to the state
+    let from="rejectedCompanies";
     const stateObject = {
       companyAdmin,
       superAdminPhoto,
+      from,
     };
     // Use navigate to redirect to the "/ApplicationDetail" route with additional attributes in state
-    navigate("/SuperAdminHomePage/RegisteredCompanies/ApplicationDetail", { state: stateObject });
+    navigate("/SuperAdminHomePage/RejectedCompanies/ApplicationDetail", { state: stateObject });
   };
 
 
@@ -147,7 +149,7 @@ console.log(completeAdminsData);
                        <div className="centreBottomDown3 specialCase2">{companyAdmin.contactNumber}</div>
                        <div className="centreBottomDown4">
                          
-                         <div className="centreBottomDown42">
+                         <div className="centreBottomDown422">
                            <button onClick={() => handleNav(companyAdmin,adminsData.superAdmin.profilePhoto)}>View</button>
                          </div>
                        </div>

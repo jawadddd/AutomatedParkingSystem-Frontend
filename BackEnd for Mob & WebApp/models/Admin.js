@@ -31,6 +31,14 @@ const AdminSchema = new mongoose.Schema({
     {
       type:String,
     },
+    floorsPlan: 
+    {
+      type: [[[{
+        name: String,
+        status: String,
+        slotNo: String
+      }]]],
+    },
   });
 
   
