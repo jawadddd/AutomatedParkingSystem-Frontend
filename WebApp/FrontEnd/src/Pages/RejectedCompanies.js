@@ -5,6 +5,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { SERVERURL } from "../ServerUrl";
 import './SuperAdminHomePanel.css';
+import loadingGif from '../images/ZKZg.gif';
 const RejectedCompanies = () => {
   
   const location = useLocation();
@@ -14,7 +15,7 @@ const RejectedCompanies = () => {
 
   const [adminsData, setAdminsData] = useState(null);
   const [filteredCompanyAdmins, setFilteredCompanyAdmins] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true); // State for loading indicator
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
@@ -38,9 +39,10 @@ console.log(completeAdminsData);
         // Set the state with the complete object
         
         setAdminsData(completeAdminsData);
-
+        setIsLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error("Error fetching Super admin data:", error.message);
+        setIsLoading(false); // Set loading to false once data is fetched
       }
     };
 
@@ -96,7 +98,11 @@ console.log(completeAdminsData);
 
 
   <div className="SuperAdminPanel">
-   
+  {isLoading ? ( // Display loading GIF if isLoading is true
+        <div className="loading-container">
+          <img src={loadingGif} alt="Loading" className="loadingGif" />
+        </div>
+      ) : (
    <div className="centre">
    
        
@@ -158,7 +164,8 @@ console.log(completeAdminsData);
                  </div>
                )}  
      </div>
-   </div>    
+   </div>   
+      )} 
        </div> 
 
     </>

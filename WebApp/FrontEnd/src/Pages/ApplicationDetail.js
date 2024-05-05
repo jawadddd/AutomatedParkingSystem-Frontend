@@ -5,8 +5,11 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { SERVERURL } from "../ServerUrl";
 import './SuperAdminHomePanel.css';
-
+import Swal from 'sweetalert2';
 import loadingGif from '../images/ZKZg.gif';
+import CompanyMap from '../components/CompanyMap';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax 
+mapboxgl.accessToken = 'pk.eyJ1IjoiamF3YWRkZCIsImEiOiJjbHNya2h2a2wwNGw1Mm5tbHdvd3d6bTZoIn0.s_p93Jzwa_4NdtUFgqMhYA';
 
 
 const AcceptConfirmationDialog = ({ open, onClose, onConfirm }) => {
@@ -42,6 +45,8 @@ const RejectConfirmationDialog = ({ open, onClose, onConfirm }) => {
   );
 };
 const ApplicationDetail = () => {
+  const [hoveredSlotCost, setHoveredSlotCost] = useState(null); // State variable to store hovered slot's cost
+
   const [adminData, setAdminData] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -49,6 +54,7 @@ const ApplicationDetail = () => {
   const { state } = location;
   console.log("state is ", state.companyAdmin);
   console.log("state is ", state.superAdminPhoto);
+  console.log("stateonly is ", state);
   const [loading, setLoading] = useState(true);
 
   const [responseIs, setResponseIs] = useState(null);  
@@ -56,6 +62,8 @@ const ApplicationDetail = () => {
   const [isAcceptConfirmationOpen, setAcceptConfirmationOpen] = useState(false);
   const [isRejectConfirmationOpen, setRejectConfirmationOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState(null);
+  const [noOfSlots, setNoOFSlots] = useState(0);
+  
   const openAcceptConfirmation = (companyId) => {
     setSelectedCompany(companyId);
     setAcceptConfirmationOpen(true);
@@ -79,20 +87,46 @@ const ApplicationDetail = () => {
   const handleConfirmAccept = async() => {
     // Call your API for accepting
     console.log("Accepted company:", selectedCompany);
-
+let response=null;
     try {
       // Call your API for accepting
-      const response = await axios.post(`${SERVERURL}/api/v1/accept`, {
-        name1: state.companyAdmin.userName, // Pass the name or any required data
-        email1: state.companyAdmin.email, // Assuming selectedCompany is the email
-      });
 
+if(state.from === "homePage")
+{
+   response = await axios.post(`${SERVERURL}/api/v1/accept`, {
+    name1: state.companyAdmin.userName, // Pass the name or any required data
+    email1: state.companyAdmin.email, // Assuming selectedCompany is the email
+  });
+
+
+}
+else
+{
+  if(state.from=== "EditRequests")
+  {
+     response = await axios.post(`${SERVERURL}/api/v1/acceptModification`, {
+      name1: state.companyAdmin.userName, // Pass the name or any required data
+      email1: state.companyAdmin.email, // Assuming selectedCompany is the email
+    });
+
+  }
+}
       console.log("API Response:", response.data);
      
       closeAcceptConfirmation();
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Accepted Successfully",
+      });
       navigate("/SuperAdminHomePage");
 
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "An Error Occured",
+      });
       console.error("Error accepting:", error.message);
     }
   };
@@ -100,25 +134,54 @@ const ApplicationDetail = () => {
   const handleConfirmReject = async() => {
     // Call your API for rejecting
     console.log("Rejected company :", selectedCompany);
-
+let response=null;
     try {
       // Call your API for accepting
-      const response = await axios.post(`${SERVERURL}/api/v1/reject`, {
-        name1: state.companyAdmin.userName, // Pass the name or any required data
-        email1: state.companyAdmin.email, // Assuming selectedCompany is the email
-      });
 
+if(state.from === "homePage")
+{
+    response = await axios.post(`${SERVERURL}/api/v1/reject`, {
+    name1: state.companyAdmin.userName, // Pass the name or any required data
+    email1: state.companyAdmin.email, // Assuming selectedCompany is the email
+  });
+
+}
+else
+{
+  if( state.from=== "EditRequests" )
+  {
+    response = await axios.post(`${SERVERURL}/api/v1/rejectModification`, {
+      name1: state.companyAdmin.userName, // Pass the name or any required data
+      email1: state.companyAdmin.email, // Assuming selectedCompany is the email
+    });
+  }
+}  
       console.log("API Response:", response.status);
      
       closeRejectConfirmation();
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Rejected Successfully",
+      });
       navigate("/SuperAdminHomePage");
 
       // Close the confirmation dialog
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "An Error Occured",
+      });
       console.error("Error accepting:", error.message);
     }
 
   };
+
+
+
+
+
   const handleMail = async () => {
     try {
       // Assuming you have a route like '/sendMessage' on your server
@@ -148,28 +211,56 @@ const ApplicationDetail = () => {
 
     return adminData.map((floor, floorIndex) => (
       
-<div className="ViewPageGrid">
-<p>Floor {floorIndex + 1}</p>
-      <div key={floorIndex} className="grid-container">
+<div className="ViewPageGrid" key={floorIndex}>
+      <p>Floor {floorIndex + 1}</p>
+      <div className="grid-container">
         {floor.map((row, rowIndex) => (
-          <div key={rowIndex} className="grid-row" style={{ gridTemplateColumns: `repeat(${row.length}, 1fr)` }}>
-             {row.map((cell, columnIndex) => (
-              <div className="grid-cell" key={columnIndex}>
+          <div 
+            key={rowIndex} 
+            className="grid-row" 
+            style={{ gridTemplateColumns: `repeat(${row.length}, 1fr)` }}
+          >
+            {row.map((cell, columnIndex) => (
+              <div 
+                className="grid-cell" 
+                key={columnIndex}
+                onMouseEnter={() => {
+                  if (cell.name === "Slot") {
+                    setHoveredSlotCost(cell.slotCost); // Set hovered slot's cost to state variable
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (cell.name === "Slot") {
+                    setHoveredSlotCost(null); // Reset hovered slot's cost when mouse leaves
+                  }
+                }}
+              >
                 {cell.name === "Slot" ? cell.slotNo : cell.name}
               </div>
             ))}
           </div>
         ))}
       </div>
-      </div>
-    ));
+      {hoveredSlotCost && <p className="slot-cost">{`Cost: ${hoveredSlotCost}`}</p>} {/* Display hovered slot's cost */}
+    </div>
+      ));
   };
 
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
         const response = await axios.get(`${SERVERURL}/api/v1/getAdminByEmail?email=${state.companyAdmin.email}`);
-        setAdminData(response.data.floorsPlan);        
+        if(response.data.completeObject.modifiedStatus === "true" && state.from === "EditRequests")
+        {
+          setNoOFSlots(response.data.completeObject.modifiedNoOfSlots);
+          setAdminData(response.data.completeObject.modifiedFloorsPlan);        
+        }
+        else
+        {
+          setNoOFSlots(response.data.completeObject.noOfSlots);
+          setAdminData(response.data.completeObject.floorsPlan);        
+        }
+        
 setLoading(false);
       } catch (error) {
         console.error("Error fetching Admin Details:", error.message);
@@ -206,6 +297,10 @@ loading ? (
   <img className="loadingGif" src={loadingGif} alt="loading..." /> // Show loading animation
 ) : (
   <>
+
+{state.companyAdmin.longitude && state.companyAdmin.latitude ? <CompanyMap coordinates={[state.companyAdmin.longitude, state.companyAdmin.latitude]} /> : null}
+
+
   <div className="heading-container">
             <h1 className="heading">Floors plan for Automated Parking System</h1>
           </div>
@@ -223,12 +318,25 @@ loading ? (
   
 
 <div className="five">
-<div><h2>Total Number of Slots Required: </h2></div>
-<div><h2> { state.companyAdmin.noOfSlots}</h2></div>
+{state.from === "registeredCompanies"?(
+  <div><h2>Total Number of Slots Present: </h2></div>
+
+) : (
+  <div><h2>Total Number of Slots Required: </h2></div>
+
+)}
+
+<div><h2> { noOfSlots}</h2></div>
 </div>
-{state.from === "homePage" && (
+{(state.from === "homePage" || state.from=== "EditRequests") && (
   <div className="AcceptReject">
-    <h2>What do You Want About this Parking Contract?</h2>
+
+{state.from=== "EditRequests" ? (
+        <h2>What do You Want About this Modified Structure?</h2>
+      ) : (
+        <h2>What do You Want About this Parking Contract?</h2>
+)}
+
     <div className="centreBottomDown413">
       <button onClick={() => openAcceptConfirmation(state.companyAdmin.email)}>Accept</button>
     </div>

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { SERVERURL } from "../ServerUrl";
 import './SuperAdminHomePanel.css';
-
+import loadingGif from '../images/ZKZg.gif';
 
 
 const AcceptConfirmationDialog = ({ open, onClose, onConfirm }) => {
@@ -54,6 +54,7 @@ const SuperAdminHomePage = () => {
   const [isAcceptConfirmationOpen, setAcceptConfirmationOpen] = useState(false);
   const [isRejectConfirmationOpen, setRejectConfirmationOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // State for loading indicator
   const openAcceptConfirmation = (companyId) => {
     setSelectedCompany(companyId);
     setAcceptConfirmationOpen(true);
@@ -154,9 +155,10 @@ console.log(completeAdminsData);
         // Set the state with the complete object
         
         setAdminsData(completeAdminsData);
-
+        setIsLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error("Error fetching Super admin data:", error.message);
+        setIsLoading(false); // Set loading to false once data is fetched
       }
     };
 
@@ -197,6 +199,8 @@ console.log(completeAdminsData);
       superAdminPhoto,
       from,
     };
+
+    console.log("from is ",stateObject);
     // Use navigate to redirect to the "/ApplicationDetail" route with additional attributes in state
     navigate("/SuperAdminHomePage/ApplicationDetail", { state: stateObject });
   };
@@ -212,7 +216,11 @@ console.log(completeAdminsData);
 
 
 <div className="SuperAdminPanel">
- 
+{isLoading ? ( // Display loading GIF if isLoading is true
+        <div className="loading-container">
+          <img src={loadingGif} alt="Loading" className="loadingGif" />
+        </div>
+      ) : (
  <div className="centre">
  
      
@@ -285,7 +293,7 @@ console.log(completeAdminsData);
    </div>
  </div>
  
- 
+            )}
      
      </div>
      <AcceptConfirmationDialog

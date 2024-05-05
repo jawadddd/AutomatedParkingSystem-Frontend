@@ -17,32 +17,75 @@ const AdminSchema = new mongoose.Schema({
     }
     ,password:{
       type:String,
+    }
+    ,verified:{
+      type:String,
     },
     noOfFloors:{
+      type:Number,
+    },
+    modifiedNoOfFloors:{
       type:Number,
     }
     ,noOfSlots:{
       type:Number,
     }
+    ,modifiedNoOfSlots:{
+      type:Number,
+    }
     ,status:{
       type:String,
+    }
+    ,MapRange:{
+      type:String,
     },
+
     profilePhoto:
     {
       type:String,
+    },
+    longitude:
+    {
+      type: String,
+    },
+    latitude:
+    {
+      type: String,
     },
     floorsPlan: 
     {
       type: [[[{
         name: String,
         status: String,
-        slotNo: String
+        slotNo: String,
+        cost: String,
+        vehicle: String,
       }]]],
     },
+    modifiedFloorsPlan: 
+    {
+      type: [[[{
+        name: String,
+        status: String,
+        slotNo: String,
+        cost: String,
+        vehicle: String,
+      }]]],
+    },
+    modifiedStatus:{
+      type:String,
+    },
+
   });
 
   
 AdminSchema.pre('save', async function () {
+  //when i modify object it again modify the password, why? apply condition
+    if (!this.isModified('password'))
+    {
+      console.log("ayahai");
+      return;
+    }
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt);
   })

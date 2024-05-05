@@ -1,80 +1,63 @@
+/* Base styles */
 .loginApply {
-    display: flex;
-    justify-content: space-between;
-    
-    padding: 20px;
-    height: 100vh;
-    width: 100vw;
-    /* border: 1px solid #ddd; */
-    border-radius: 5px;
-  }
-  @media only screen and (max-width: 768px) {
-    /* Your styles for mobile view go here */
-    .loginApply {
-      flex-direction: column !important;
-    }
-    .loginApplyL {
-      width:100% !important;
-      min-height:15% !important;
-    }
-    .loginApplyR {
-      width:100% !important;
-      min-height: 100% !important;
-    }
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100VW;
+  background-color: #f3f4f6; /* Background color */
+}
+.lastbut
+{
+  margin-left: 20px !important;
+}
 
+.loginApplyL {
+  position: relative;
+  flex: 1;
+}
+
+.backgroundImageContainer {
+  
+  width: 100%;
+  height: 98vh !important;
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+}
+
+.loginApplyR {
+  flex: 1;
+  padding: 40px;
+  background-color: transparent; /* Transparent background */
+  animation: fadeIn 1s ease;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  .loginApply {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Stretch elements vertically */
+  }
+  
   .loginApplyL {
-    width:50%;
-    min-height:100%;
-    display: flex;
-    padding-left: 5%;
-    align-items: center;
-    justify-content: center;
-}
-.loginApplyL h1{
-  font-size: 50px !important;
-}
-.loginApplyLC{
-    display: block;
-}
-  .loginApplyL h1 {
-    margin-bottom: 20px;
+    display: none; /* Hide left side on mobile */
   }
-  
-  .loginApplyLbottom {
-    display: flex;
-
-    justify-content: space-around;
-    padding: 0px 60px 0px 60px;
-  }
-  
-  .loginApplyLbottom button {
-    width: 70px !important;
-    height:31px !important;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: rgb(132, 132, 132);
-    border: 1px solid rgb(132, 132, 132);
-    border-radius: 15px !important;
-  }
-  
- 
-  
-  .loginApplyLbottom button.active {
-    background-color: #008CBA;
-    color: white;
-    border: none;
-  }
-  
   .loginApplyR {
-    width:50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;
+    flex: 1; /* Take up full width and height */
+    padding: 20px; /* Adjust padding for better mobile view */
   }
-  
+}

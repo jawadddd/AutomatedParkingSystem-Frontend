@@ -1,3 +1,39 @@
+.imp{
+  justify-content: space-between !important;
+}
+.imp2{
+  flex-wrap: wrap !important;
+}
+.imp3{
+  justify-content: end !important;
+}
+@media (max-width: 858px){
+.container {
+margin-top:0px !important;
+}
+}
+.imp6{
+  padding-left: 90px !important;
+}
+.impHeader{
+  letter-spacing:0px !important;
+}
+.adminPages .container{
+  padding-left: 90px !important;
+  justify-content: flex-start;
+}
+@media (min-width: 768px){
+.md\:p-4 {
+    padding: 0rem !important;
+}
+}
+@media (min-width: 768px){
+.md\:p-8 {
+    padding: 1rem !important;
+}
+}
+
+
 .register-form {
     max-width: 400px;
     margin: auto;
@@ -24,7 +60,19 @@
     display: block;
     margin-bottom: 5px;
   }
-  
+  .imp4{
+    display: block !important;
+    padding-left: 90px !important;
+  }
+  .imp4 h1{
+    text-align: left !important;
+  }
+  .imp4 h2{
+    text-align: left !important;
+  }
+  .imp4 h3{
+    text-align: left !important;
+  }
   input {
     width: 300px;
     padding: 10px;

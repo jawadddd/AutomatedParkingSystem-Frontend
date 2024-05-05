@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     // attach the user to the job routes
-    req.body.user = { userId: payload.userId, name: payload.name }
+    req.locals = { userId: payload.userId, name: payload.name }
     //i have used word user for both admin and user in auth req.body 
     next()
   } catch (error) {

@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SuperAdminHomePanel.css";
 import axios from "axios";
 
+import Map from '../components/Map';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax 
+mapboxgl.accessToken = 'pk.eyJ1IjoiamF3YWRkZCIsImEiOiJjbHNya2h2a2wwNGw1Mm5tbHdvd3d6bTZoIn0.s_p93Jzwa_4NdtUFgqMhYA';
+ 
 const ApplicationFormPage = () => {
   const [rows, setRows] = useState([5]);
   const [columns, setColumns] = useState([5]);
   const [noOfFloors, setNoOfFloors] = useState(1);
-    const [selectedBlock, setSelectedBlock] = useState(null);
+  const [cost, setCost] = useState(1);
+  
+    const [selectedBlock, setSelectedBlock] = useState("Enter");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,28 +23,43 @@ const ApplicationFormPage = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [slotNumberInput, setSlotNumberInput] = useState("");
   const [selectedCellIndex, setSelectedCellIndex] = useState(null);
-
+  const coordinates = [74.341045, 31.509866];
   const handleChange = (e, floorIndex) => {
     const { name, value } = e.target;
 
     switch (name) {
       case "noOfFloors":
-        setNoOfFloors(Number(value));
-        console.log(rows[floorIndex]);
+        if (Number(value) > 0)
+        {
+          setNoOfFloors(Number(value));
+          console.log(rows[floorIndex]);  
+        }
+        break;
+      case "cost":
+        if (Number(value) > 0)
+        {
+          setCost(Number(value));
+        }
         break;
       case "rows":
-        setRows(prevRows => {
-          const updatedRows = [...prevRows];
-          updatedRows[floorIndex] = value;
-          return updatedRows;
-        });
+        if (Number(value) > 0)
+        {
+          setRows(prevRows => {
+            const updatedRows = [...prevRows];
+            updatedRows[floorIndex] = value;
+            return updatedRows;
+          });
+        }
         break;
       case "columns":
-        setColumns(prevColumns => {
-          const updatedColumns = [...prevColumns];
-          updatedColumns[floorIndex] = value;
-          return updatedColumns;
-        });
+        if(Number(value) > 0)
+        {
+          setColumns(prevColumns => {
+            const updatedColumns = [...prevColumns];
+            updatedColumns[floorIndex] = value;
+            return updatedColumns;
+          });  
+        }
         break;
       default:
         break;
@@ -54,7 +75,9 @@ const ApplicationFormPage = () => {
         Array.from({ length: 5 }, () => ({
           name: "",
           status: "",
-          slotNo: ""
+          slotNo: "",
+          cost: "",
+          vehicle: ""
         }))
       ));
       // Add default values of 5 to rows and columns when adding a new floor
@@ -78,7 +101,9 @@ const ApplicationFormPage = () => {
         floor.push(Array.from({ length: numColumns }, () => ({
           name: "",
           status: "",
-          slotNo: ""
+          slotNo: "",
+          cost: "",
+          vehicle: ""
         })));
       }
   
@@ -91,7 +116,9 @@ const ApplicationFormPage = () => {
           row.push({
             name: "",
             status: "",
-            slotNo: ""
+            slotNo: "",
+            cost: "",
+            vehicle: ""
           });
         }
   
@@ -110,7 +137,13 @@ const ApplicationFormPage = () => {
       setShowDialog(true);
       setSelectedCellIndex({ floorIndex, rowIndex, columnIndex });
       updatedGrid[floorIndex][rowIndex][columnIndex].name = selectedBlock;
-      updatedGrid[floorIndex][rowIndex][columnIndex].status = "available"; // Assuming the status should be set to "available"
+      updatedGrid[floorIndex][rowIndex][columnIndex].status = "Available"; // Assuming the status should be set to "available"
+      //convert cost which is number to String form
+      updatedGrid[floorIndex][rowIndex][columnIndex].cost = cost.toString();
+
+
+
+      updatedGrid[floorIndex][rowIndex][columnIndex].cost = cost;
       setGrid(updatedGrid);
     } else {
       const updatedGrid = [...grid];
@@ -140,6 +173,8 @@ const ApplicationFormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("again is,",locationCoordinates);
+      const [longitude, latitude] = locationCoordinates;
       let totalSlots=0;
       console.log(state.email);
       if(state.profilePhoto!==null)
@@ -170,7 +205,9 @@ console.log("TotalSlots are:"+totalSlots);
         form.append("noOfSlots", totalSlots);
         form.append("noOfFloors", noOfFloors);
         form.append("floorsPlan", JSON.stringify(grid));
-        
+        form.append("longitude", longitude);
+    form.append("latitude", latitude);
+    
         
         const response = await axios.post('http://localhost:4000/api/v1/register', form);
 
@@ -197,13 +234,22 @@ console.log("TotalSlots are:"+totalSlots);
 
     // ...
   };
+   
+  const [locationCoordinates, setLocationCoordinates] = useState([74.341045, 31.509866]);
 
+  const handleMarkerMove = (center) => {
+    console.log("on marker move",center );
+    setLocationCoordinates([center[0], center[1]]);
+  };
   return (
     <>
       <div className="ApplicationFormPage">
-        <h1>Give Us Information of Floors & Slots of your Parking System!</h1>
+       <div className="outerShadow"> <h1>Application Form</h1>
+        
+<Map coordinates={["72.0","42.4"]} onMarkerMove={handleMarkerMove} />
+
         <div className="form-group form-group2">
-          <h2>Number Of Floors: </h2>
+          <h2>Tell Us Number Of Floors of Your Parking</h2>
           <input
             type="number"
             id="noOfFloors"
@@ -214,13 +260,26 @@ console.log("TotalSlots are:"+totalSlots);
             required
           />
         </div>
-        <div className="form-group form-group2">
-          <h2>Choose here and Click on cells in grid to assign them Values</h2>
-          <button className="blocktype" onClick={() => setSelectedBlock("Enter")}>Enter</button>
-          <button className="blocktype" onClick={() => setSelectedBlock("Exit")}>Exit</button>
-          <button className="blocktype" onClick={() => setSelectedBlock("Slot")}>Slot</button>
-          <button className="blocktype" onClick={() => setSelectedBlock("Hurdle")}>Hurdle</button>
-          <button className="blocktype" onClick={() => setSelectedBlock("Road")}>Road</button>
+<div className="form-group form-group2">
+          <h2>Cost of Slot in PKR</h2>
+          <input
+            type="number"
+            id="cost"
+            placeholder="Enter Number here"
+            name="cost"
+            value={cost}
+            onChange={(e) => handleChange(e, 0)}
+            required
+          />
+        </div>        
+        <div className="form-group form-group2 buttonslist">
+          <h2>Choose here and Click cells in grid to assign them Values</h2>
+          <button className={selectedBlock !== "Enter" ? "block1 abc1" : "block1 abc2"} onClick={() => setSelectedBlock("Enter")}>Enter</button>
+            <button className={selectedBlock !== "Exit" ? "blocktype abc1" : "blocktype abc2"} onClick={() => setSelectedBlock("Exit")}>Exit</button>
+            <button className={selectedBlock !== "Slot" ? "blocktype abc1" : "blocktype abc2"} onClick={() => setSelectedBlock("Slot")}>Slot</button>
+            <button className={selectedBlock !== "Hurdle" ? "blocktype abc1" : "blocktype abc2"} onClick={() => setSelectedBlock("Hurdle")}>Hurdle</button>
+            <button className={selectedBlock !== "Road" ? "lastblock abc1" : "lastblock abc2"} onClick={() => setSelectedBlock("Road")}>Road</button>
+
         </div>
 
         {grid.map((floor, floorIndex) => (
@@ -285,8 +344,9 @@ console.log("TotalSlots are:"+totalSlots);
             </div>
           </div>
         </div>
+
       )}
-      
+        </div>      
     </>
   );
 };

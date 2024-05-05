@@ -1,6 +1,7 @@
 import React ,{ useState, useEffect } from "react";
 import Login from '../components/Login';
 import Apply from '../components/Apply';
+import pic1 from '../images/blog-why-reverse-parking-hero.jpg'
 import './LoginApply.css';
 const LoginApplyPage = () => {
     const [activeButton, setActiveButton] = useState('login'); // 'login' or 'apply'
@@ -16,17 +17,11 @@ const LoginApplyPage = () => {
     
     <div className="loginApply">
       <div className="loginApplyL">
-      <div className="loginApplyLC">
-        <h1>Login/Apply</h1>
-      <div className="loginApplyLbottom">
-        <button onClick={setLogin} className={activeButton === 'login' ? 'active' : ''} >
-            Login
-        </button>
-        <button onClick={setApply} className={activeButton === 'apply' ? 'active' : ''}>
-            Apply
-        </button>
+      <div className="backgroundImageContainer">
+                    <img src={pic1} alt="Background" className="backgroundImage" />
+                    
         </div>
-        </div>
+
     </div>
 <div className="loginApplyR">    
 {activeButton === 'login' ? <Login setApply={setApply}  /> : <Apply setLogin={setLogin} />}

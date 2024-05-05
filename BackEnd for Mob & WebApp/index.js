@@ -8,6 +8,7 @@ const upload = multer();
 app.use(upload.any());
 const cors = require("cors");
 app.use(cors());
+app.use(cors({credentials:true,origin:"http://localhost:3000"}));
 
 const connectDB= require('./db/connect')
 app.use("/uploads", express.static("uploads"));

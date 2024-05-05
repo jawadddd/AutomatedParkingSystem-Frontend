@@ -1,3 +1,104 @@
+.mapboxgl-ctrl-bottom-right{
+  display: none !important;
+}
+.fix{
+position: fixed;
+width:100vw;
+z-index: 1;
+}
+.flexin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spac{
+  padding-top: 100px !important;
+}
+
+.abc2{
+  background-color: #999 !important;
+}
+.block1{
+border-top-left-radius:10px !important;
+border-bottom-left-radius: 10px !important;
+width: 65px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: small;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    background-color: #626175;
+    color: white;
+}
+.lastblock{
+  width: 65px !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: small;
+    background-color: #626175;
+    color: white;
+  border-top-right-radius: 10px !important;
+  border: none;
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-right-radius: 10px !important;
+}
+
+.outerShadow {
+  /* Prominent styling for the form */
+  margin: 50px;
+  padding: 30px;
+  border-radius:20px ;
+  min-width: 70vw !important;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+.suggestionWrapper {
+  background: #fff !important;
+  position: absolute !important;
+  width: 350px !important;
+  padding: 2px 0px 2px 0px;
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.suggestionWrapper:focus {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.suggestion {
+  cursor: pointer;
+  text-align:left;
+  width:98% !important;
+  padding: 5px 3px 5px 20px !important;
+  border-bottom: 1px solid rgb(236, 236, 239);
+  transition: background-color 0.2s ease;
+}
+
+.suggestion:hover {
+  background-color: #f0f0f0 !important;
+}
+
+  .sidebarr {
+  background-color: rgb(35 55 75 / 90%);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+  }
+
+
 .dialog {
     position: fixed;
     top: 0;
@@ -11,6 +112,7 @@
     animation: fadeIn 0.3s ease-in; /* Adjusted animation duration */
   }
   .floorsPlann{
+    padding: 15px;
     width:100%;
   }
 
@@ -104,7 +206,7 @@ border-radius: 10px;
   }
 .heading-container {
     width:100%;
-    padding-left: 5%;
+    padding: 15px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -134,7 +236,10 @@ border-radius: 10px;
   }
   .loadingContainer{
     min-height:40vh;
+    border-radius: 20px;
+
     min-width: 100% !important;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -241,7 +346,7 @@ border-radius: 10px;
 .FormLeftRightSide{
 display: flex !important;
 flex-direction: row !important;
-
+border: 1px solid lightgray;
 padding: 20px;
 border-radius: 15px;
 margin-bottom: 20px;
@@ -249,10 +354,10 @@ background-color: white !important;
 
 }
 .blocktype{
-    margin-left: 10px !important;
-    width:130px !important;
+ border-radius: 0px !important;
+    width:65px !important;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
- font-size:medium;
+ font-size:small;
  background-color: #626175;
  color: white;
 }
@@ -264,7 +369,7 @@ background-color: white !important;
     padding-left: 30px !important;
 }
 .ViewPageGrid{
-    padding-left: 30px !important;
+    padding: 0px !important;
 }
 .ApplicationFormPage {
     display: flex;
@@ -292,7 +397,7 @@ background-color: white !important;
 
   .submitButton {
     padding: 10px 20px;
-    width: 180px !important;
+    width: 200px !important;
     margin-left: 10px;
     font-size: medium;
     border: none;
@@ -333,11 +438,11 @@ background-color: white !important;
     font-family: "Poppins", sans-serif !important;
    background-color: #e5e4e4 !important;
     display: flex;
-    align-items:flex-start;
+    align-items:center !important;
+    justify-content: center;
     min-width: fit-content !important;
     min-height:100vh;
 
-    padding: 4%;
     
     flex-direction: column;
 
@@ -346,13 +451,15 @@ background-color: white !important;
     display: flex;
     align-items: center !important;
     
-    text-align: center !important;
-    justify-content: center !important;
+    text-align:start !important;
+    justify-content:flex-start !important;
 }
 .form-group2 h2 {
     margin-bottom: 0px !important;
     min-width: fit-content;
+    margin-right: 20px;
     font-weight: 500;
+    font-size: medium ;
 }
 .form-group2 input{
 margin-left:5%;
@@ -373,8 +480,15 @@ height:35px !important;
     font-weight:500;
 }
 .five div h2{
-    font-weight:500;
+    font-weight:500 !important;
+    font-size: large !important;
 }
+
+.outerShadow h1{
+  font-weight: 700 !important;
+  font-size: 27px !important;
+}
+
 
 
 
@@ -456,7 +570,6 @@ object-fit: cover;
 
 .SuperAdminPanelDetailTwo{
     height: 100%;
-     padding-left:3% ;
     min-width: 100% !important;
     /* display: flex !important; */
     align-items:flex-start !important;
@@ -468,7 +581,6 @@ text-align: start !important;
 .SuperAdminPanelDetailThree{
     height: 100%;
     min-width: 100%;
-    padding-left: 5%;
     padding-top:16px;
     padding-bottom:30px;
     display: flex;
@@ -587,8 +699,30 @@ text-align: start !important;
     width:100px !important;
     color: #706f6f !important;
 }
-
-
+.loading-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+.centre23{display: block;
+width: auto;
+padding: 30px;
+align-items: center;
+justify-content: center;
+border-radius: 20px;
+border: 1px solid rgb(159, 155, 155);
+}
+.myform{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 .confirmation-dialog {
     display: flex;
@@ -598,6 +732,7 @@ text-align: start !important;
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100 !important;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -637,6 +772,58 @@ text-align: start !important;
   .confirmation-content button:last-child {
     background-color: #f44336;
   }
+
+
+
+
+
+.absolute12345 button {
+  width: 80px;
+  font-family: inherit;
+  font-size: small;
+  font-weight: 600;
+  color: #6c6b6b;
+  background-color: #f7f3f3;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.absolute12345 button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.absolute12345 {
+  position: fixed;
+  top: 80px;
+  right: 50px;
+}
+
+.custom-button {
+  width: 80px;
+  font-family: inherit;
+  font-size: small;
+  font-weight: 600;
+  color: #6c6b6b;
+  background-color: #f7f3f3;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #e0e0e0;
+}
+
+
+
+
 .centreTop{
     text-align: center;
     display: flex;
@@ -647,7 +834,7 @@ text-align: start !important;
     height: auto;
 }
 .specialCase{
-    padding: 0% 5% 2% 5% !important;
+    padding: 0% 5% 0% 5% !important;
 }
 .specialCase2{
     justify-content: flex-start !important;

@@ -107,7 +107,7 @@ const Apply = ({setLogin}) => {
 
 
       <div className="form-group">
-        <button type="submit">Continue</button>
+        <button type="submit" className="lastbut">Continue</button>
       </div>
       <div className="form-group">
         <p>Already have an account? <span className="link" onClick={setLogin}>Login</span> </p>
