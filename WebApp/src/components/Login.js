@@ -2,6 +2,7 @@ import React ,{ useEffect,useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import Cookies from "js-cookie";
+import { SERVERURL } from "../ServerUrl";
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +25,7 @@ const Login = ({setApply}) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/login', formData);
+      const response = await axios.post(`${SERVERURL}/api/v1/login`, formData);
 
       if (response.status === 200) {
         console.log('Login Successful:', response.data.message);

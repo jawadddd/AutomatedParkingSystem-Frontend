@@ -1,1 +1,1 @@
-export const SERVERURL = `http://localhost:4000`;
+export const SERVERURL = `https://apsbackend-production.up.railway.app`;

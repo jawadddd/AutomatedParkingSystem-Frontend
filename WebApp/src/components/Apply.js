@@ -2,6 +2,7 @@ import React ,{ useEffect,useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Apply.css';
+import { SERVERURL } from "../ServerUrl";
 const Apply = ({setLogin}) => {
   const navigate = useNavigate();
     const [formData, setFormData] = useState({

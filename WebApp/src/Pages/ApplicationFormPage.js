@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SuperAdminHomePanel.css";
 import axios from "axios";
-
+import { SERVERURL } from "../ServerUrl";
 import Map from '../components/Map';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamF3YWRkZCIsImEiOiJjbHNya2h2a2wwNGw1Mm5tbHdvd3d6bTZoIn0.s_p93Jzwa_4NdtUFgqMhYA';
@@ -209,7 +209,7 @@ console.log("TotalSlots are:"+totalSlots);
     form.append("latitude", latitude);
     
         
-        const response = await axios.post('http://localhost:4000/api/v1/register', form);
+        const response = await axios.post(`${SERVERURL}/api/v1/register`, form);
 
         if (response.status === 200) {
           console.log('Registration Successful:', response.data.message);
