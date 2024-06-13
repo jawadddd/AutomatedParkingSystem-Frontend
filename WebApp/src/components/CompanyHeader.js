@@ -2,7 +2,7 @@ import React from 'react';
 
 const CompanyHeader = ({ adminIs }) => {
   return (
-    <div className="bg-white shadow-md font-sans fix">
+    <div className="bg-white borderrr font-sans fix">
       <div className="container myy mx-auto imp3 flexjustify-enditems-center p-1 md:p-4">
         <h2 className=" md:text-2xl justify-end impHeader font-bold tracking-wide text-gray-700">Welcome Back, {adminIs.userName}</h2>
         <div className="flex items-center  space-x-1 md:space-x-3">

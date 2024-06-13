@@ -148,6 +148,7 @@ const ApplicationFormPage = () => {
     } else {
       const updatedGrid = [...grid];
       updatedGrid[floorIndex][rowIndex][columnIndex].name = selectedBlock;
+      updatedGrid[floorIndex][rowIndex][columnIndex].slotNo=selectedBlock;
       setGrid(updatedGrid);
     }
   };
@@ -165,7 +166,7 @@ const ApplicationFormPage = () => {
   const handleSaveSlotNumber = () => {
     const { floorIndex, rowIndex, columnIndex } = selectedCellIndex;
     const updatedGrid = [...grid];
-    updatedGrid[floorIndex][rowIndex][columnIndex].slotNo = "Slot"+slotNumberInput;
+    updatedGrid[floorIndex][rowIndex][columnIndex].slotNo = ""+slotNumberInput;
     setGrid(updatedGrid);
     handleDialogClose();
   };
@@ -337,7 +338,7 @@ console.log("TotalSlots are:"+totalSlots);
         <div className="dialog">
           <div className="dialog-content">
             <h2>Enter Slot Number:</h2>
-            <input type="number" value={slotNumberInput} onChange={handleSlotNumberInput} />
+            <input type="text" value={slotNumberInput} onChange={handleSlotNumberInput} />
             <div className="dialog-buttons">
               <button onClick={handleSaveSlotNumber}>Save</button>
               <button onClick={handleDialogClose}>Cancel</button>

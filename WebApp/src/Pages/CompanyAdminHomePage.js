@@ -70,7 +70,7 @@ const CompanyAdminHomePage = () => {
   return (
     <div className=" h-screen bg-white adminPages">
       {/* Sidebar */}
-      <div className="bg-gray-900 fixed top-0 left-0 h-full z-50">
+      <div className="bg-gray-900 fixed top-0 left-0 h-full z-50 thisz">
         <AdminSidebar setSelectedComponent={setSelectedComponent} />
       </div>
 

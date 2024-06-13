@@ -36,6 +36,7 @@ useEffect(() => {
   const fetchAdmin = async () => {
     try {
       const response = await axios.get(`${SERVERURL}/api/v1/getAdminByEmail?email=${state}`);
+      setNoOfFloors(response.data.completeObject.noOfFloors);
       setAdminData(response.data.completeObject.floorsPlan);        
       
 setLoading(false);
@@ -319,6 +320,7 @@ const handleCellClick = (floorIndex, rowIndex, columnIndex) => {
   } else {
     const updatedGrid = [...adminData];
     updatedGrid[floorIndex][rowIndex][columnIndex].name = selectedBlock;
+    updatedGrid[floorIndex][rowIndex][columnIndex].slotNo=selectedBlock;
     setAdminData(updatedGrid);
   }
 };
@@ -336,7 +338,7 @@ const handleSlotNumberInput = (e) => {
 const handleSaveSlotNumber = () => {
   const { floorIndex, rowIndex, columnIndex } = selectedCellIndex;
   const updatedGrid = [...adminData];
-  updatedGrid[floorIndex][rowIndex][columnIndex].slotNo = "Slot"+slotNumberInput;
+  updatedGrid[floorIndex][rowIndex][columnIndex].slotNo = ""+slotNumberInput;
   setAdminData(updatedGrid);
   handleDialogClose();
 };
@@ -372,7 +374,7 @@ console.log("TotalSlots are:"+totalSlots);
       form.append("noOfSlots", totalSlots);
       form.append("noOfFloors", noOfFloors);
       form.append("modifiedFloorsPlan", JSON.stringify(adminData));
-      const response = await axios.post('http://localhost:4000/api/v1/modify', form);
+      const response = await axios.post(`${SERVERURL}/api/v1/modify`, form);
 
       if (response.status === 200) {
         console.log('Request Successful:', response.data.message);
@@ -462,7 +464,7 @@ loading ? (<div className='loadingContainer'>
         <div className="dialog">
           <div className="dialog-content">
             <h2>Enter Slot Number:</h2>
-            <input type="number" value={slotNumberInput} onChange={handleSlotNumberInput} />
+            <input type="text" value={slotNumberInput} onChange={handleSlotNumberInput} />
             <div className="dialog-buttons">
               <button onClick={handleSaveSlotNumber}>Save</button>
               <button onClick={handleDialogClose}>Cancel</button>
